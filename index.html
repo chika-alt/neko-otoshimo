@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ねこおとし</title>
+
+  <!-- PWA用 -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffb6c1">
+
+  <style>
+    body {
+      margin: 0;
+      background: #ffe6f0;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin: 10px 0;
+    }
+    canvas {
+      background: #fff;
+      border-radius: 12px;
+      touch-action: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>ねこおとし 🐱</h1>
+  <canvas id="game" width="300" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+
+    let catX = 120;
+    let catY = 0;
+    let score = 0;
+
+    function drawCat() {
+      ctx.fillStyle = "#ff69b4";
+      ctx.beginPath();
+      ctx.arc(catX, catY, 15, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      catY += 2;
+
+      if (catY > canvas.height) {
+        catY = 0;
+        catX = Math.random() * (canvas.width - 30) + 15;
+        score++;
+      }
+
+      drawCat();
+      ctx.fillStyle = "#333";
+      ctx.fillText("スコア: " + score, 10, 20);
+
+      requestAnimationFrame(update);
+    }
+
+    canvas.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      catX = touch.clientX - rect.left;
+    });
+
+    update();
+  </script>
+</body>
+</html>
