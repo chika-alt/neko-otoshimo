@@ -1,0 +1,15 @@
+{
+  "name": "ねこ落とし",
+  "short_name": "ねこ落とし",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff3f7",
+  "theme_color": "#ff9dbb",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
